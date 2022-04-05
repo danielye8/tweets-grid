@@ -20,7 +20,12 @@ def process_tweet(tweet):
     ptweet = tweet[:-2]
     if ptweet[-1] == ']':
         ptweet = ptweet[:-1]
-    tweet_json = json.loads(ptweet)
+        
+    try:
+      tweet_json = json.loads(ptweet)
+    except Exception as e:
+      print(e)
+    
     id = None
     lang = None
     if tweet_json['doc']['coordinates'] is not None:
