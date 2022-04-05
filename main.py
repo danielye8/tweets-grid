@@ -62,7 +62,7 @@ if rank == 0:
 
     twts.close()
 
-    for i in range(size):
+    for i in range(1, size):
         comm.send('FINISH', dest=i)
 
 else:
@@ -79,7 +79,7 @@ else:
                 if grid_id is not None:
                     location[grid_id][lang] += 1
             except Exception as e:
-                print(tweet)
+                print('slave: ', tweet)
 
         if finish:
             break
