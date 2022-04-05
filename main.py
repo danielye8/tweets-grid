@@ -2,6 +2,8 @@ import json
 from collections import defaultdict, Counter
 from mpi4py import MPI
 import time
+import csv
+
 
 with open('sydGrid.json') as json_file:
     grid = json.load(json_file)
@@ -35,6 +37,45 @@ def process_tweet(tweet):
                     break
 
     return id, lang
+
+
+def get_language_mapping():
+  langs_path = 'constants/languages.json'
+  with open(langs_path) as fp:
+    table = json.load(fp)[1:]
+  pairs = map(lambda row: (row['FIELD2'], row['FIELD1']), table)
+  out_table = dict(pairs)
+  # Simplified a
+  out_table['zh-cn'] = 'Chinese'
+  out_table['zh-tw'] = 'Chinese'
+  return out_table
+
+class LangaugeDecoder():
+  def __init__(self, map):
+    self.map = map
+  def decode(self, code):
+    if code in self.map: return self.map[code]
+    return code
+
+lang_coder = LangaugeDecoder(get_language_mapping())
+
+def create_csv(filepath, data):
+  with open(filepath, 'w') as fp:
+    writer = csv.writer(fp)
+    header = ['Cell', '#Total Tweets', '#Number of Languages Used', '#Top 10 Languages & #Tweets']
+    writer.writerow(header)
+    for cell_id, cell in data.items():
+      row = [cell_id] + list(cell_summary(cell))
+      writer.writerow(row)
+      
+    
+def cell_summary(cell: dict) -> tuple:
+  n_lang = len(cell)
+  total_tweets = sum(cell.values())
+  lang_sorted = tuple(sorted(cell.items(), key=lambda lang: -lang[1]))[:10]
+  print(lang_sorted)
+  lang_sorted = ', '.join(('-'.join([lang_coder.decode(lang), str(count)]) for lang, count in lang_sorted))
+  return total_tweets, n_lang, lang_sorted
 
 
 if rank == 0:
@@ -97,6 +138,7 @@ comm.barrier()
 gather_data = comm.gather(location_array, root=0)
 
 if rank == 0:
+
     final_data = defaultdict(lambda: defaultdict(int))
     for node in gather_data:
         for grid in node:
@@ -105,4 +147,6 @@ if rank == 0:
                 ln = grid[i][0]
                 count = grid[i][1]
                 final_data[id][ln] += count
-    print(final_data)
+    
+
+    create_csv('bigTwitterSummary.csv', final_data)
