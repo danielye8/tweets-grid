@@ -1,0 +1,142 @@
+[
+  {
+    "FIELD1": "Name",
+    "FIELD2": "Language code"
+  },
+  {
+    "FIELD1": "English",
+    "FIELD2": "en"
+  },
+  {
+    "FIELD1": "Arabic",
+    "FIELD2": "ar"
+  },
+  {
+    "FIELD1": "Bengali",
+    "FIELD2": "bn"
+  },
+  {
+    "FIELD1": "Czech",
+    "FIELD2": "cs"
+  },
+  {
+    "FIELD1": "Danish",
+    "FIELD2": "da"
+  },
+  {
+    "FIELD1": "German",
+    "FIELD2": "de"
+  },
+  {
+    "FIELD1": "Greek",
+    "FIELD2": "el"
+  },
+  {
+    "FIELD1": "Spanish",
+    "FIELD2": "es"
+  },
+  {
+    "FIELD1": "Persian",
+    "FIELD2": "fa"
+  },
+  {
+    "FIELD1": "Finnish",
+    "FIELD2": "fi"
+  },
+  {
+    "FIELD1": "Filipino",
+    "FIELD2": "fil"
+  },
+  {
+    "FIELD1": "French",
+    "FIELD2": "fr"
+  },
+  {
+    "FIELD1": "Hebrew",
+    "FIELD2": "he"
+  },
+  {
+    "FIELD1": "Hindi",
+    "FIELD2": "hi"
+  },
+  {
+    "FIELD1": "Hungarian",
+    "FIELD2": "hu"
+  },
+  {
+    "FIELD1": "Indonesian",
+    "FIELD2": "id"
+  },
+  {
+    "FIELD1": "Italian",
+    "FIELD2": "it"
+  },
+  {
+    "FIELD1": "Japanese",
+    "FIELD2": "ja"
+  },
+  {
+    "FIELD1": "Korean",
+    "FIELD2": "ko"
+  },
+  {
+    "FIELD1": "Malay",
+    "FIELD2": "msa"
+  },
+  {
+    "FIELD1": "Dutch",
+    "FIELD2": "nl"
+  },
+  {
+    "FIELD1": "Norwegian",
+    "FIELD2": "no"
+  },
+  {
+    "FIELD1": "Polish",
+    "FIELD2": "pl"
+  },
+  {
+    "FIELD1": "Portuguese",
+    "FIELD2": "pt"
+  },
+  {
+    "FIELD1": "Romanian",
+    "FIELD2": "ro"
+  },
+  {
+    "FIELD1": "Russian",
+    "FIELD2": "ru"
+  },
+  {
+    "FIELD1": "Swedish",
+    "FIELD2": "sv"
+  },
+  {
+    "FIELD1": "Thai",
+    "FIELD2": "th"
+  },
+  {
+    "FIELD1": "Turkish",
+    "FIELD2": "tr"
+  },
+  {
+    "FIELD1": "Ukrainian",
+    "FIELD2": "uk"
+  },
+  {
+    "FIELD1": "Urdu",
+    "FIELD2": "ur"
+  },
+  {
+    "FIELD1": "Vietnamese",
+    "FIELD2": "vi"
+  },
+  {
+    "FIELD1": "Chinese (Simplified)",
+    "FIELD2": "zh-cn"
+  },
+  {
+    "FIELD1": "Chinese (Traditional)",
+    "FIELD2": "zh-tw"
+  }
+]
