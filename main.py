@@ -39,17 +39,23 @@ def process_tweet(tweet):
 
 if rank == 0:
     tweets = []
-    with open('tinyTwitter.json') as twts:
+    with open('bigTwitter.json') as twts:
         i = 0
         for tweet in twts:
             if i % size != 0:
                 comm.send(tweet, dest=i % size)
             else:
                 if tweet[2:7] != "total":
-                    id, lang = process_tweet(tweet)
+                    grid_id, lang = process_tweet(tweet)
 
-                    if id is not None:
-                        location[id][lang] += 1
+                    if grid_id is not None:
+                        location[grid_id][lang] += 1
+
+            if i < 5:
+                print(tweet)
+
+            elif i%10000 == 0:
+                print(i)
 
             i += 1
 
@@ -67,25 +73,33 @@ else:
             break
 
         if tweet[2:7] != "total":
-            id, lang = process_tweet(tweet)
+            grid_id, lang = process_tweet(tweet)
 
-            if id is not None:
-                location[id][lang] += 1
+            if grid_id is not None:
+                location[grid_id][lang] += 1
 
         if finish:
             break
 
-comm.barrier()
-gather_data = comm.gather(location, root=0)
+location_array = []
 
+for id in location:
+    add = []
+    add.append(id)
+    for lang in location[id]:
+        add.append([lang, location[id][lang]])
+    location_array.append(add)
+
+comm.barrier()
+gather_data = comm.gather(location_array, root=0)
 
 if rank == 0:
-    final_data = gather_data[0]
-
-    for dict in gather_data[1:]:
-        for id in dict:
-            for lang in id:
-                final_data[id][lang] += dict[id][lang]
-
-print(final_data)
-
+    final_data = defaultdict(lambda: Counter)
+    for node in gather_data:
+        for grid in node:
+            id = grid[0]
+            for i in range(1,len(grid)):
+                ln = grid[i][0]
+                count = grid[i][1]
+                final_data[id][ln] += count
+    print(final_data)
