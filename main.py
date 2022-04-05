@@ -1,5 +1,5 @@
 import json
-from collections import defaultdict
+from collections import defaultdict, Counter
 from mpi4py import MPI
 import time
 
@@ -13,7 +13,7 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-location = defaultdict(lambda: defaultdict(int))
+location = defaultdict(lambda: Counter)
 
 
 def process_tweet(tweet):
