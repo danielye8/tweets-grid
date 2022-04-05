@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=1
 
 module purge
-module load python/3.9.0
+module load python/3.7.4
 module load foss/2019b
 module load mpi4py/3.0.2-timed-pingpong
 
