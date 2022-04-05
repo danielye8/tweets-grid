@@ -73,7 +73,7 @@ def cell_summary(cell: dict) -> tuple:
   n_lang = len(cell)
   total_tweets = sum(cell.values())
   lang_sorted = tuple(sorted(cell.items(), key=lambda lang: -lang[1]))[:10]
-  print(lang_sorted)
+  
   lang_sorted = ', '.join(('-'.join([lang_coder.decode(lang), str(count)]) for lang, count in lang_sorted))
   return total_tweets, n_lang, lang_sorted
 

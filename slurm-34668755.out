@@ -1,0 +1,61 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) showq/0.15   2) slurm/latest
+0
+1000000
+2000000
+3000000
+4000000
+(('en', 4186), ('ja', 56), ('es', 42), ('und', 42), ('in', 32), ('ca', 24), ('pt', 15), ('tl', 13), ('zh', 13), ('de', 12))
+(('en', 888), ('ht', 17), ('und', 7), ('ja', 6), ('in', 6), ('ro', 6), ('es', 5), ('et', 5), ('it', 5), ('tl', 4))
+(('en', 179), ('tl', 2), ('da', 1), ('ca', 1), ('ht', 1))
+(('en', 611), ('in', 5), ('ja', 5), ('zh', 5), ('ro', 4), ('es', 3), ('pt', 3), ('ca', 2), ('und', 1), ('tl', 1))
+(('en', 450), ('ja', 8), ('pt', 3), ('it', 2), ('es', 1), ('fr', 1), ('de', 1), ('nl', 1), ('in', 1), ('tr', 1))
+(('en', 481), ('zh', 5), ('und', 4), ('it', 4), ('ja', 3), ('tl', 2), ('de', 2), ('fi', 1), ('in', 1), ('pt', 1))
+(('en', 20), ('fr', 1))
+(('en', 90), ('pt', 2), ('cy', 2), ('es', 1), ('und', 1), ('lt', 1), ('ca', 1))
+(('en', 154), ('und', 2), ('es', 1), ('et', 1), ('ca', 1), ('th', 1), ('tl', 1), ('pt', 1))
+(('en', 84), ('in', 6), ('es', 2), ('und', 2), ('zh', 1), ('fr', 1), ('ro', 1))
+(('en', 9), ('in', 1), ('th', 1))
+(('en', 80), ('fr', 2), ('tr', 2), ('es', 1))
+(('en', 42), ('fr', 2), ('und', 1), ('ht', 1), ('de', 1))
+(('en', 3),)
+(('en', 21), ('und', 1), ('ja', 1))
+(('en', 31), ('es', 2))
+
+real	2m18.875s
+user	0m0.013s
+sys	0m0.018s
+Job ID           : 34668755
+Cluster          : spartan
+User/Project     : daniely/comp90024
+Nodes            : 2
+Wall-clock time  : 00:02:26 / 00:15:00
+
+Displaying overall resources usage from 2022-04-06 03:02:16 to 2022-04-06 03:04:42:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm089 : 
+                CPU# 1    : 95.6   (  85.9 /   9.7 /   0.0 /   4.4 ) 
+                CPU# 2    : 95.6   (  95.5 /   0.1 /   0.0 /   4.4 ) 
+                CPU# 3    : 95.6   (  95.6 /   0.0 /   0.0 /   4.4 ) 
+                CPU# 4    : 95.6   (  95.4 /   0.2 /   0.0 /   4.4 ) 
+
+spartan-bm100 : 
+                CPU# 5    : 95.5   (  94.6 /   0.8 /   0.0 /   4.5 ) 
+                CPU# 6    : 95.5   (  94.7 /   0.8 /   0.0 /   4.5 ) 
+                CPU# 7    : 95.5   (  94.7 /   0.8 /   0.0 /   4.5 ) 
+                CPU# 8    : 95.5   (  94.7 /   0.8 /   0.0 /   4.5 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 8    
+
+Memory used (RAM)         : 0.0%  [4MB of 32000MB]
+
+--------------------------------------------
+

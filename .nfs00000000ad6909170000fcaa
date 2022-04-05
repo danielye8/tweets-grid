@@ -1,0 +1,11 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) showq/0.15   2) slurm/latest
+Traceback (most recent call last):
+  File "main.py", line 73, in <module>
+    location[id][lang] += 1
+TypeError: 'type' object is not subscriptable
+slurmstepd: error: *** STEP 34662252.0 ON spartan-bm100 CANCELLED AT 2022-04-05T18:42:58 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 34662252 ON spartan-bm100 CANCELLED AT 2022-04-05T18:42:58 DUE TO TIME LIMIT ***
