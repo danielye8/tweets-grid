@@ -5,27 +5,33 @@ import os
 import sys
 import typing
 from collections import Counter, defaultdict
-from email.policy import default
 from pathlib import Path
 from typing import Union
 from warnings import catch_warnings
 
 from shapely.geometry import Point, Polygon
 
-
 class Tweet():
   """Convenience class for tweets"""
   def __init__(self, tweet: dict):
-    self.data = tweet
-  def get_location(self) -> typing.Optional[str]:
-    if location := self.data['doc']['coordinates']:
+    self._location = self._get_location(tweet)
+    self._language = self._get_language(tweet)
+  
+  def _get_location(self, tweet: dict) -> typing.Optional[Point]:
+    if location := tweet['doc']['coordinates']:
       location = location['coordinates']
       return Point(location)
     return None
-  def get_language(self) -> typing.Optional[str]:
-    if language := self.data['doc']['lang']:
+
+  def get_location(self):
+    return self._location
+
+  def _get_language(self, tweet: dict) -> typing.Optional[str]:
+    if language := tweet['doc']['lang']:
       return language
     return None
+  def get_language(self):
+    return self._language
   
 
 class Grid():
@@ -57,10 +63,10 @@ def count_tweets(tweets: list, grid: Grid) -> dict:
   locations_dict = defaultdict(lambda: defaultdict(int))
 
   for tweet in tweets:
-    if bool(lang := tweet.get_language()) \
+    if (bool(lang := tweet.get_language()) \
       and bool(location := tweet.get_location()) \
-        and bool(cell_id := grid.get_cell_container(location)):
-      print('lang:', lang, '\tlocation:', location, '\tcell:', cell_id)
+        and bool(cell_id := grid.get_cell_container(location))):
+      
       locations_dict[cell_id][lang] += 1
       
   return locations_dict
@@ -69,10 +75,11 @@ def create_output(cell_lang_counts: dict, fpath: str) -> str:
   """Creates the required CSV output file.
 
   Returns:
-      str: Serialised CSV output
+      str: 
   """
   with open(fpath, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
+    print('dict keys', cell_lang_counts.keys())
   
     for cell, language_dict in cell_lang_counts.items():
       for lang, count in language_dict.items():
@@ -103,14 +110,16 @@ def main() -> int:
   # Stream from tweet file (in parallel)
   with open(args.tweets) as tweets_f:
     tweets = json.load(tweets_f)
+
   with open(args.grid) as grid_f:
     grid = json.load(grid_f)
+
   grid = Grid(grid)
   tweets = [Tweet(tweet) for tweet in tweets['rows']]
   
   # Count tweets in grids
   output = count_tweets(tweets, grid)
-  print('#cells', len(output))
+  print(output)
   
   
   create_output(output, 'output.csv')
