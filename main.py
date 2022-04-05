@@ -13,13 +13,13 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-location = defaultdict(lambda: Counter)
-
+location = defaultdict(lambda: defaultdict(int))
 
 def process_tweet(tweet):
     ptweet = tweet[:-2]
-    if ptweet[-1] == ']':
-        ptweet = ptweet[:-1]
+    if ptweet[-2:] != '}}':
+        ptweet += '}'
+
     tweet_json = json.loads(ptweet)
     id = None
     lang = None
@@ -45,16 +45,17 @@ if rank == 0:
             if i % size != 0:
                 comm.send(tweet, dest=i % size)
             else:
-                if tweet[2:7] != "total":
-                    grid_id, lang = process_tweet(tweet)
+                if i != 0 and tweet[0] == '{':
+                    try:
+                        grid_id, lang = process_tweet(tweet)
+                        if grid_id is not None:
+                            location[grid_id][lang] += 1
+                    except Exception as e:
+                        print('EXCEPTION: ', tweet)
+                        print(e)
+                        print('LAST: ', tweet[-1])
 
-                    if grid_id is not None:
-                        location[grid_id][lang] += 1
-
-            if i < 5:
-                print(tweet)
-
-            elif i%10000 == 0:
+            if i%1000000 == 0:
                 print(i)
 
             i += 1
@@ -72,11 +73,13 @@ else:
             finish = True
             break
 
-        if tweet[2:7] != "total":
-            grid_id, lang = process_tweet(tweet)
-
-            if grid_id is not None:
-                location[grid_id][lang] += 1
+        if tweet[0] == '{':
+            try:
+                grid_id, lang = process_tweet(tweet)
+                if grid_id is not None:
+                    location[grid_id][lang] += 1
+            except Exception as e:
+                print(tweet)
 
         if finish:
             break
@@ -94,7 +97,7 @@ comm.barrier()
 gather_data = comm.gather(location_array, root=0)
 
 if rank == 0:
-    final_data = defaultdict(lambda: Counter)
+    final_data = defaultdict(lambda: defaultdict(int))
     for node in gather_data:
         for grid in node:
             id = grid[0]
