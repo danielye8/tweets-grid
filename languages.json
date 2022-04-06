@@ -148,7 +148,11 @@
     "FIELD2": "et"
   },
   {
-    "FIELD1": "Catalan",
-    "FIELD2": "ca"
+    "FIELD1": "Chinese",
+    "FIELD2": "zh"
+  },
+  {
+    "FIELD1": "Welsh",
+    "FIELD2": "cy"
   }
 ]
