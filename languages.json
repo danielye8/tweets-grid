@@ -138,5 +138,17 @@
   {
     "FIELD1": "Chinese (Traditional)",
     "FIELD2": "zh-tw"
+  },
+  {
+    "FIELD1": "Catalan",
+    "FIELD2": "ca"
+  },
+  {
+    "FIELD1": "Estonian",
+    "FIELD2": "et"
+  },
+  {
+    "FIELD1": "Catalan",
+    "FIELD2": "ca"
   }
- ]
+]
